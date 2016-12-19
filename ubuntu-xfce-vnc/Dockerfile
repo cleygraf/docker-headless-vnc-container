@@ -12,7 +12,7 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV DISPLAY :1
 ENV NO_VNC_HOME /root/noVNC
 ENV VNC_COL_DEPTH 24
-ENV VNC_RESOLUTION 1280x1024
+ENV VNC_RESOLUTION 1440x900
 ENV VNC_PW vncpassword
 
 ENV SAKULI_DOWNLOAD_URL https://labs.consol.de/sakuli/install
@@ -39,13 +39,13 @@ RUN apt-get update \
     && echo "CHROMIUM_FLAGS='--no-sandbox --start-maximized --user-data-dir'" > ~/.chromium-browser.init
 
 ##### Add Oracle JAVA JRE8
-RUN mkdir -p $JAVA_HOME \
-    # download and extract
-    && wget -qO- $SAKULI_DOWNLOAD_URL/3rd-party/java/jre-$JAVA_VERSION-linux-x64.tar.gz | tar xz --strip 1 -C $JAVA_HOME \
-    # set alternatives
-    && update-alternatives --install "/usr/bin/java" "java" "$JAVA_HOME/bin/java" 1 \
-    && update-alternatives --install "/usr/bin/javaws" "javaws" "$JAVA_HOME/bin/javaws" 1 \
-    && update-alternatives --install "/usr/lib/firefox/browser/plugins/mozilla-javaplugin.so" "mozilla-javaplugin.so" "$JAVA_HOME/lib/amd64/libnpjp2.so" 1
+#RUN mkdir -p $JAVA_HOME \
+#    # download and extract
+#    && wget -qO- $SAKULI_DOWNLOAD_URL/3rd-party/java/jre-$JAVA_VERSION-linux-x64.tar.gz | tar xz --strip 1 -C $JAVA_HOME \
+#    # set alternatives
+#    && update-alternatives --install "/usr/bin/java" "java" "$JAVA_HOME/bin/java" 1 \
+#    && update-alternatives --install "/usr/bin/javaws" "javaws" "$JAVA_HOME/bin/javaws" 1 \
+#    && update-alternatives --install "/usr/lib/firefox/browser/plugins/mozilla-javaplugin.so" "mozilla-javaplugin.so" "$JAVA_HOME/lib/amd64/libnpjp2.so" 1
 
 # xvnc server porst, if $DISPLAY=:1 port will be 5901
 EXPOSE 5901
